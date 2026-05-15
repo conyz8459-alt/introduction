@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>花草苑 - AI产品经理作品集</title>
+    <style>
+        /* 全局变量与极简呼吸感配色 */
+        :root {
+            --primary-green: #3A5A40; /* 沉稳的森林绿 */
+            --light-green: #A3B18A;   /* 柔和的低饱和绿 */
+            --bg-color: #F8FAF8;      /* 呼吸感白绿背景 */
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            /* 开启幻灯片吸附滚动效果 */
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        /* 每一页 PPT 的容器设定 */
+        section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            position: relative;
+        }
+
+        /* 装饰背景元素 */
+        .bg-blob {
+            position: absolute;
+            background: linear-gradient(135deg, var(--bg-color) 0%, #eef5ef 100%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(60px);
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .header-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+
+        /* 卡片设计 - 私人博物馆的精致感 */
+        .card {
+            background: var(--card-bg);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(58, 90, 64, 0.04);
+            border: 1px solid rgba(163, 177, 138, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(58, 90, 64, 0.08);
+        }
+
+        .card h3 {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3::before {
+            content: "🌿";
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(163, 177, 138, 0.15);
+            color: var(--primary-green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* 底部链接大按钮 */
+        .cta-btn {
+            display: inline-block;
+            background: var(--primary-green);
+            color: #fff;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(58, 90, 64, 0.2);
+        }
+
+        .cta-btn:hover {
+            background: #2b4330;
+            transform: translateY(-2px);
+        }
+
+        /* 引导下滑箭头 */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--light-green);
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            section { padding: 4rem 5%; height: auto; min-height: 100vh; }
+            .header-title { font-size: 2rem; }
+            .scroll-down { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 第 1 页：产品洞察与价值 (Slide 1: Background & Insight) -->
+    <section id="slide1">
+        <div class="bg-blob" style="width: 500px; height: 500px; top: -100px; left: -100px;"></div>
+        <div>
+            <h1 class="header-title">花草苑 —— 你的私人植物志</h1>
+            <p class="header-subtitle">一款面向普通人的数字花草档案工具。你可以一键识别路边那株你感兴趣的花草，填写相遇地点和心情随笔，生成独属于你的植物卡片，并且存入电子花草苑持续关注。
+            <div class="grid-container">
+                <div class="card">
+                    <h3>市场破局：去社交化的私人档案</h3>
+                    <p>市面识花产品（如形色、花草志）过于商业化或强学术社交，忽视了普通人的情感留存。花草苑反其道而行，定位为<b>纯粹的私人数字博物馆</b>，通过 AI 视觉识别开启“命名即拥有”的情感连接。</p>
+                    <div class="tags">
+                        <span class="tag">多模态AI</span>
+                        <span class="tag">情感连接</span>
+                        <span class="tag">去社交化</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>痛点洞察：唤醒城市中的“背景板”</h3>
+                    <p><b>认知断层：</b>每日路过的街边植物，因无法识别而沦为无意义的背景。<br><b>记录零散：</b>植物四季的生长变化散落相册，缺乏结构化的“我与植物的专属故事”归档。</p>
+                    <p><b>目标用户：</b>追求生活质感、希望通过自然观察缓解城市焦虑的个体。</p>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">↓</div>
+    </section>
+
+    <!-- 第 2 页：技术选型与 AI 策略 (Slide 2: Implementation) -->
+    <section id="slide2">
+        <div class="bg-blob" style="width: 600px; height: 600px; bottom: -200px; right: -100px;"></div>
+        <div>
+            <h1 class="header-title">AI 架构与技术决策</h1>
+            <p class="header-subtitle">以产品思维驱动大模型选型与 Vibe Coding 敏捷交付</p>
+
+            <div class="grid-container">
+                <div class="card">
+                    <h3>模型选型：Qwen3.5-Omni-Flash</h3>
+                    <p><b>多模态原生：</b>保障花卉细微纹理的高精度识别。<br>
+                    <b>商业性价比：</b>高并发下的低调用成本，支撑独立产品的可持续运转。<br>
+                    <b>本土生态：</b>中文语料库储备深厚，在处理中国传统植物寓意与文化意蕴时，准确率与表现力优于海外模型。</p>
+                </div>
+                
+                <div class="card">
+                    <h3>开发工具：全栈 AI 交付链路</h3>
+                    <p>采用 <b>Gemini + Cursor</b> 的 AI-Native 工作流。<br>
+                    由 Gemini 协助完善产品逻辑与边界约束，通过 Cursor IDE 实操验证。利用自然语言描述需求，极大降低了产品经理将“业务构想”转化为“可运行代码”的工程门槛。</p>
+                </div>
+
+                <div class="card">
+                    <h3>系统提示词设计 (Prompt Engineering)</h3>
+                    <p><b>人设注入：</b>“浪漫的资深植物学家”，兼顾学术严谨与温情。<br>
+                    <b>结构化约束：</b>强制 JSON 输出，确保前端渲染完美闭环。<br>
+                    <b>异常前置：</b>植入“非植物检测”拒绝逻辑，从源头阻断多模态幻觉。</p>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">↓</div>
+    </section>
+
+    <!-- 第 3 页：产品迭代与演示 (Slide 3: Iteration & Demo) -->
+    <section id="slide3">
+        <div class="bg-blob" style="width: 400px; height: 400px; top: 20%; left: 30%;"></div>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <h1 class="header-title">体验演进与 MVP 交付</h1>
+            <p class="header-subtitle">极简闭环：拍一拍 → 识一识 → 写一写 → 存一存</p>
+
+            <div class="grid-container" style="text-align: left; margin-bottom: 3rem;">
+                <div class="card">
+                    <h3>视觉与交互美学</h3>
+                    <p><b>极简呼吸感：</b>绿色与白色主调，卡片式 UI 营造数字博物馆的高级感。<br>
+                    <b>时间轴记忆：</b>“和它的故事”不仅记录科普，更支持随笔和四季照片留存，大幅拉长产品生命周期与用户粘性。</p>
+                </div>
+
+                <div class="card">
+                    <h3>不确定性治理 (Badcase 优化)</h3>
+                    <p>面对易混淆长尾样本（如“牡丹”与“芍药”），通过 Prompt 补充典型差异特征进行范例引导（Few-shot）；增加传统视觉预处理规则，强化对背景杂物的剔除，提升容错率。</p>
+                </div>
+            </div>
+
+            <!-- 产品入口按钮 -->
+            <a href="https://flower-gallery-chi.vercel.app/" target="_blank" class="cta-btn">
+                🌿 点击访问 “花草苑” MVP 演示
+            </a>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-gray);">
+                注：当前为 Demo 环境，建议使用手机端访问以体验最佳交互感受。
+            </p>
+        </div>
+    </section>
+
+</body>
+</html>
